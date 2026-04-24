@@ -17,17 +17,23 @@
 
 
 import os
-
 import urllib.request
 import progressbar
 import zipfile
-
 from gvxrPython3 import gvxr
 
 pbar = None;
 
 
 def downloadLungman():
+    """Download the Lungman phantom dataset from Zenodo.
+
+    :return: - the path of the ZIP file
+             - the path of the Lungman data in the ZIP file
+             - the path of the mesh data in Lungman data
+             - the path of the CT data in Lungman data
+    """
+
     # where to save the data
     lungman_path = os.path.join("output_data", "lungman");
     mesh_path = os.path.join(lungman_path, "MESHES");
@@ -65,6 +71,13 @@ def downloadLungman():
 
 
 def extractLungmanSTL(zip_fname, lungman_path):
+    """Extract the mesh data from the ZIP file.
+
+    :param str zip_fname: the path of the ZIP file
+    :param str lungman_path: the path of the Lungman data in the ZIP file
+    :return: the file names of the mesh data once extracted
+    """
+
     stl_fname_set = [];
 
     with zipfile.ZipFile(zip_fname) as z:
@@ -81,25 +94,12 @@ def extractLungmanSTL(zip_fname, lungman_path):
     return stl_fname_set;
 
 
-def extractFilesFromZipFile(zip_fname, input_path, output_path, fnames):
-    DICOM_fname_set = [];
-
-    for DICOM_slice in fnames:
-
-        input_DICOM_fname = os.path.join(input_path, DICOM_slice);
-        output_DICOM_fname = os.path.join(output_path, DICOM_slice + ".dcm");
-        DICOM_fname_set.append(output_DICOM_fname);
-
-        with zipfile.ZipFile(zip_fname) as z:
-            if not os.path.exists(output_DICOM_fname):
-                print("Extract %s" % input_DICOM_fname);
-                with open(output_DICOM_fname, 'wb') as f:
-                    f.write(z.read(input_DICOM_fname));
-
-    return DICOM_fname_set;
-
-
 def loadLungmanMeshes(mesh_path):
+    """Extract the mesh data from the ZIP file.
+
+    :param str mesh_path: the path of the mesh data
+    """
+
     gvxr.removePolygonMeshesFromXRayRenderer();
 
     gvxr.emptyMesh("lungman");
