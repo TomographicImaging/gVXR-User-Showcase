@@ -1,0 +1,13 @@
+name: gvxr-wedge
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - ncrystal=4.4.6
+  - numpy
+  - matplotlib
+  - jupyterlab
+  - ipykernel
+  - pip
+  - pip:
+      - gvxr==2.1.0
