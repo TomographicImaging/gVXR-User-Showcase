@@ -10,11 +10,11 @@ From that folder, run:
 
 ```bash
 conda env create -f environment.yml       # first time only
-conda activate gvxr-wedge
+conda activate gvxr
 python -m jupyterlab build_neutron_wedge.ipynb
 ```
 
-Select the Python kernel from the **gvxr-wedge** environment and run the cells in order. Part 5 displays a snapshot of the instrument. The optional `gvxr.renderLoop()` cell lets you rotate the scene in a separate window; press **Q** in that window to return to the notebook and continue the acquisition. You can skip this cell to go straight to the radiographs.
+Select the Python kernel from the **gvxr** environment and run the cells in order. Part 5 displays a snapshot of the instrument. The optional `gvxr.renderLoop()` cell lets you rotate the scene in a separate window; press **Q** in that window to return to the notebook and continue the acquisition. You can skip this cell to go straight to the radiographs.
 
 **WSL2 note:** The Conda file supplies the Python software. The OpenGL window also needs working graphics in WSLg. If rendering is slow, check `glxinfo -B` in the same WSL terminal. On the NVIDIA laptop used for this project, the following launch selected the GPU when the default renderer was `llvmpipe`:
 
